@@ -7,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CuentaCorrienteTest {
 
-    private CuentaCorriente cuentaCorriente;
+    private Cuenta cuenta;
 
     @BeforeEach
     void setUp(){
-        cuentaCorriente = new CuentaCorriente("1111111A", "José García");
+        cuenta = new Cuenta("1111111A", "José García");
     }
 
     @Test
     void ingresarDineroCuentaACero() {
         double ingreso = 200;
-        assertEquals(cuentaCorriente.getSaldo(), 0);
+        assertEquals(cuenta.getSaldo(), 0);
 
-        cuentaCorriente.ingresarDinero(ingreso);
-        assertEquals(cuentaCorriente.getSaldo(), ingreso);
+        cuenta.ingresarDinero(ingreso);
+        assertEquals(cuenta.getSaldo(), ingreso);
     }
 
     @Test
@@ -28,11 +28,11 @@ class CuentaCorrienteTest {
         double ahorro = 1000;
         double ingreso = 200;
 
-        cuentaCorriente.setSaldo(ahorro);
-        assertEquals(cuentaCorriente.getSaldo(), ahorro);
+        cuenta.setSaldo(ahorro);
+        assertEquals(cuenta.getSaldo(), ahorro);
 
-        cuentaCorriente.ingresarDinero(ingreso);
-        assertEquals(cuentaCorriente.getSaldo(), ahorro + ingreso);
+        cuenta.ingresarDinero(ingreso);
+        assertEquals(cuenta.getSaldo(), ahorro + ingreso);
     }
 
     @Test
@@ -40,11 +40,11 @@ class CuentaCorrienteTest {
         double ahorro = 1000;
         double extracto = 200;
 
-        cuentaCorriente.setSaldo(ahorro);
-        assertEquals(cuentaCorriente.getSaldo(), ahorro);
+        cuenta.setSaldo(ahorro);
+        assertEquals(cuenta.getSaldo(), ahorro);
 
-        boolean resultado = cuentaCorriente.sacarDinero(extracto);
-        assertEquals(cuentaCorriente.getSaldo(), ahorro - extracto);
+        boolean resultado = cuenta.sacarDinero(extracto);
+        assertEquals(cuenta.getSaldo(), ahorro - extracto);
         assertTrue(resultado);
     }
 
@@ -53,30 +53,30 @@ class CuentaCorrienteTest {
         double saldoInicial = 100;
         double extracto = 200;
 
-        cuentaCorriente.setSaldo(saldoInicial);
-        assertEquals(cuentaCorriente.getSaldo(), saldoInicial);
+        cuenta.setSaldo(saldoInicial);
+        assertEquals(cuenta.getSaldo(), saldoInicial);
 
-        boolean resultado = cuentaCorriente.sacarDinero(extracto);
+        boolean resultado = cuenta.sacarDinero(extracto);
         assertFalse(resultado);
-        assertEquals(saldoInicial, cuentaCorriente.getSaldo());
+        assertEquals(saldoInicial, cuenta.getSaldo());
     }
 
     @Test
     void sacarTodo() {
         int dinero = 300;
-        cuentaCorriente.setSaldo(dinero);
-        assertEquals(dinero, cuentaCorriente.getSaldo());
-        boolean sacado = cuentaCorriente.sacarDinero(dinero);
-        assertEquals(0, cuentaCorriente.getSaldo());
+        cuenta.setSaldo(dinero);
+        assertEquals(dinero, cuenta.getSaldo());
+        boolean sacado = cuenta.sacarDinero(dinero);
+        assertEquals(0, cuenta.getSaldo());
         assertTrue(sacado);
     }
 
     @Test
     void sacarDineroSuperiorLimite() {
         int saldoInicial = 1000, sacar = 500; //limite 399
-        cuentaCorriente.setSaldo(saldoInicial);
-        boolean resultado = cuentaCorriente.sacarDinero(sacar);
-        assertEquals(saldoInicial, cuentaCorriente.getSaldo());
+        cuenta.setSaldo(saldoInicial);
+        boolean resultado = cuenta.sacarDinero(sacar);
+        assertEquals(saldoInicial, cuenta.getSaldo());
         assertFalse(resultado);
     }
 
